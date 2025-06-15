@@ -1,6 +1,5 @@
 a=input("enter the string which having not poor words ") # "This movie is not that poor!"
 
-
 s=a.find("not")
 y=a.find("poor")
 print(s,y)
