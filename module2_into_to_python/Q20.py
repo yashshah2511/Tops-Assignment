@@ -64,7 +64,7 @@ try:
         print("\n✅ User account created successfully!")
         user.display()
     else:
-        print("❌ Failed to create password.")
+        print("Failed to create password.")
 
 except Exception as e:
     print("Unexpected error:", e)
