@@ -2,6 +2,7 @@ n=int(input("entyer the number"))
 list1=[]
 list2=[]
 z=0
+y=0
 
 def fact(j):
     if j==0:
@@ -25,9 +26,9 @@ print("odd series",z)
 
 
 for k in list1:
-    z=z+(k**2)/(fact(k))
+    y=y+(k**2)/(fact(k))
     
-print("even series",z)
+print("even series",y)
 # def fact(j):
 #     if j == 0:
 #         return 1
