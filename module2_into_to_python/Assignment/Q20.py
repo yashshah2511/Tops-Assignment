@@ -61,7 +61,7 @@ try:
 
     if password:
         user = User(user_id, name, password)
-        print("\n✅ User account created successfully!")
+        print("\n User account created successfully!")
         user.display()
     else:
         print("Failed to create password.")
