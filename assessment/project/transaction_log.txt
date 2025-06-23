@@ -1,0 +1,2 @@
+[2025-06-22 20:01:49.200143] Added 5 Pear(s) at price 800.0.
+[2025-06-22 20:05:48.379103] Customer bought 1 Pear(s) for Rs.800.0.
