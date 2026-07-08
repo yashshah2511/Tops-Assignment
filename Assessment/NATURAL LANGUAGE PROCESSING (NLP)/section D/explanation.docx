@@ -1,0 +1,3 @@
+### Improvement Made
+
+The AI-generated code used `train_test_split()` without the `stratify` parameter. This could result in an uneven distribution of Positive and Negative reviews between the training and testing datasets. I added `stratify=y` to preserve the class distribution in both datasets, making the model evaluation more reliable and consistent.

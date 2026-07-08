@@ -1,0 +1,13 @@
+AI Prompt Used
+
+Create a Python 3 program for a food delivery review sentiment analysis system.
+
+Requirements:
+
+1. Accept a list of food delivery customer reviews as input (hardcoded or user-entered).
+2. Preprocess each review using tokenization, English stopword removal, and Porter stemming with NLTK.
+3. Convert the processed reviews into TF-IDF features using scikit-learn.
+4. Train a Logistic Regression model to classify reviews as Positive or Negative.
+5. Split the dataset into training and testing sets and print the model accuracy.
+6. Allow the user to enter three new reviews at runtime and predict the sentiment for each review.
+7. Use clear comments and readable Python code.

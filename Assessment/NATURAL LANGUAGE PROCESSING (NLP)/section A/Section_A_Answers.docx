@@ -1,0 +1,143 @@
+Data Science – Module 11
+Assessment M11-A1
+
+Section A – Concept Application
+
+S1 sCENARIO
+You are building an automated customer support chatbot for a food delivery platform
+that handles queries like 'Where is my order?', 'I want to cancel my order', and 'My food
+arrived cold and late'.
+
+Question: Identify two NLP techniques the chatbot must use to correctly understand and route
+these customer messages. Explain why each technique is necessary and describe what would
+happen to chatbot accuracy if either technique were removed.
+
+(Answer)
+An automated customer support chatbot for a food delivery platform must use intent recognition and sentiment analysis to understand customer messages accurately.
+
+1. Intent Recognition:
+Intent recognition identifies the purpose of a customer's message. For example, the chatbot should recognize whether a customer wants to track an order, cancel an order, or report a problem with the delivered food. This allows the chatbot to route the request to the correct service or provide the appropriate response. If intent recognition is removed, the chatbot may misunderstand customer requests and provide incorrect or irrelevant responses, reducing overall accuracy.
+
+2. Sentiment Analysis:
+Sentiment analysis determines the emotional tone of a customer's message, such as positive, neutral, or negative. For example, the message "My food arrived cold and late" expresses dissatisfaction and should be treated as a complaint that may require priority handling. Understanding customer sentiment helps the chatbot respond more politely and escalate serious issues when necessary. Without sentiment analysis, the chatbot may fail to recognize frustrated customers and provide generic responses, leading to a poor customer experience and lower chatbot effectiveness.
+
+In conclusion, intent recognition ensures that customer requests are correctly understood and routed, while sentiment analysis helps the chatbot respond appropriately based on the customer's emotions. Both techniques are essential for improving chatbot accuracy and customer satisfaction.
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+S2 SCENARIO
+You are processing 50,000 raw customer reviews scraped from a food delivery app. The
+reviews contain mixed letter cases, special characters, emojis, numbers, and common
+filler words such as 'the', 'is', and 'a'.
+
+Question: Describe the text preprocessing pipeline you would apply to this dataset before
+feeding it to any NLP model. Justify the order in which you would apply each step, and explain
+specifically why skipping stopword removal could hurt downstream model performance.
+
+(Answer)
+
+Before training an NLP model, the customer reviews should go through the following text preprocessing pipeline:
+
+Convert text to lowercase:
+First, convert all text to lowercase so that words like "Food", "FOOD", and "food" are treated as the same word. This reduces duplicate representations and creates a consistent dataset.
+Remove special characters, emojis, punctuation, and numbers:
+Next, remove unnecessary symbols, emojis, punctuation marks, and numbers that usually do not contribute to understanding the meaning of the reviews. This helps reduce noise in the dataset.
+Tokenization:
+Split each review into individual words or tokens. Tokenization prepares the text for further preprocessing and feature extraction.
+Stopword Removal:
+Remove common words such as "the", "is", "a", and "an" because they occur frequently but usually carry very little meaningful information for text classification.
+Stemming or Lemmatization:
+Finally, reduce words to their root or base form. For example, "delivering", "delivered", and "delivery" can be reduced to a common base word, allowing the model to treat them as related terms.
+
+Justification for the order:
+Lowercasing is performed first to standardize the text. Cleaning special characters and numbers removes unwanted noise before tokenization. Tokenization must occur before stopword removal because stopwords are removed from individual tokens. Stemming or lemmatization is applied at the end so that the remaining meaningful words are converted to their root forms.
+
+Why skipping stopword removal can hurt performance:
+If stopwords are not removed, very common words such as "the", "is", and "a" will appear frequently in the dataset and may dominate the feature representation. These words provide little useful information for understanding customer reviews, increase the dimensionality of the data, and make it harder for the model to focus on important words such as "late", "cold", "refund", or "cancel". As a result, the model may achieve lower accuracy and require more processing time.
+
+----------------------------------------------------------------------------------------------------------
+
+S3 SCENARIO
+You are building a food item search feature that must rank menu descriptions by
+relevance to a customer's typed query, for example 'spicy chicken without onion'.
+
+Question: Compare Bag of Words and TF-IDF as text representation methods for this ranking
+task. Which would you choose and why? Identify one limitation that your chosen method still has
+even after it is applied.
+
+(Answer)
+
+**Bag of Words (BoW)** and **TF-IDF (Term Frequency–Inverse Document Frequency)** are two common methods for representing text in NLP.
+
+**Bag of Words (BoW):**
+Bag of Words represents a document by counting how many times each word appears. Every word is treated equally, regardless of how common or rare it is across all documents. While this method is simple and easy to implement, it often gives high importance to frequently occurring words that may not be very informative.
+
+**TF-IDF:**
+TF-IDF assigns weights to words based on both their frequency in a document and their rarity across the entire dataset. Words that appear frequently in one document but rarely in others receive higher importance, making TF-IDF more effective at identifying meaningful keywords.
+
+For the food item search feature, I would choose **TF-IDF** because it provides more accurate relevance ranking. For example, in the query **"spicy chicken without onion"**, important words such as **"spicy"**, **"chicken"**, and **"onion"** receive higher weights than common words, allowing the system to return menu items that better match the customer's search.
+
+**Limitation of TF-IDF:**
+Even after applying TF-IDF, the model does not understand the meaning or context of words. It treats words independently and cannot recognize synonyms, word order, or semantic relationships. For example, it may not understand that **"hot chicken"** and **"spicy chicken"** have similar meanings, which can reduce the quality of search results.
+
+---------------------------------------------------------------------------------------------------------
+
+S4 SCENARIO
+You are training a Naive Bayes classifier to automatically label incoming food delivery
+support tickets as 'Delivery Issue', 'Food Quality Issue', or 'App Issue' using a dataset of
+10,000 historical labelled tickets.
+
+Question: Explain the core probabilistic assumption that Naive Bayes makes about its input
+features. Describe a realistic food delivery example where this assumption is violated, and
+explain how that violation would affect the model's classification accuracy
+
+(Answer)
+
+Naive Bayes is a probabilistic classification algorithm that assumes all input features are **conditionally independent** of each other given the class label. In other words, it assumes that the presence of one word does not affect the presence of another word in the same document.
+
+In a food delivery support system, this assumption is often violated because many words naturally occur together. For example, in the support ticket **"My food arrived cold and late"**, the words **"cold"** and **"late"** are related and frequently appear together in complaints about poor delivery service. These words are not independent, but Naive Bayes treats them as if they are unrelated.
+
+When this assumption is violated, the model may calculate incorrect probabilities for each class. As a result, it may misclassify a support ticket. For example, a complaint about **food quality** could be incorrectly classified as a **delivery issue** or vice versa because the model cannot fully capture the relationship between dependent words. This reduces the overall classification accuracy, especially when important features are highly correlated.
+
+
+----------------------------------------------------------------------------------------------------------
+
+S5 SCENARIO
+You are comparing a Logistic Regression model and a Naive Bayes model for classifying
+food delivery reviews as Positive, Neutral, or Negative. Your dataset is heavily
+imbalanced: 80% of reviews are Positive, 15% Neutral, and 5% Negative.
+
+Question: Describe two evaluation metrics you would prioritise over accuracy when comparing
+these models on this imbalanced dataset. Explain one technique you would apply to address the
+class imbalance before training.
+
+(Answer)
+Since the dataset is highly imbalanced (80% Positive, 15% Neutral, and 5% Negative), accuracy is not a reliable evaluation metric because a model could predict most reviews as Positive and still achieve high accuracy while performing poorly on the minority classes.
+
+1. Precision:
+Precision measures the proportion of correctly predicted positive instances out of all instances predicted as that class. It is useful because it indicates how many of the model's predictions are actually correct, reducing false positive predictions.
+
+2. Recall:
+Recall measures the proportion of actual instances of a class that are correctly identified by the model. It is especially important for minority classes, such as Negative reviews, because it ensures that important negative feedback is not overlooked.
+
+Technique to address class imbalance:
+One effective technique is SMOTE (Synthetic Minority Over-sampling Technique). SMOTE increases the number of samples in the minority classes by generating synthetic examples instead of simply duplicating existing ones. This creates a more balanced dataset, allowing the model to learn patterns from all classes more effectively and improving its ability to classify Neutral and Negative reviews.
+----------------------------------------------------------------------------------------------------------
+
+S6 SCENARIO
+You are integrating a Hugging Face transformer pipeline into your food delivery app to
+automatically generate polite responses to customer reviews in real time, at a rate of
+several hundred requests per minute.
+Question: Explain what the attention mechanism in transformers enables that traditional
+RNN-based models could not do effectively with long text sequences. Describe one practical
+challenge of running a transformer model in a high-traffic production environment and one
+common way to mitigate it.
+
+(Answer)
+The attention mechanism is a key feature of transformer models that allows the model to focus on the most relevant words in a sentence while processing the entire text at the same time. Unlike traditional RNN-based models, which process words sequentially and often struggle to retain information from long text sequences, transformers can capture relationships between words that are far apart. This enables them to better understand context and generate more accurate and meaningful responses.
+
+A practical challenge of deploying a transformer model in a high-traffic production environment is its high computational cost. Processing several hundred requests per minute requires significant CPU or GPU resources, which can increase response time and operational costs.
+
+One common way to mitigate this challenge is model optimization, such as using a smaller transformer model or applying model quantization. These techniques reduce the model's size and computation requirements while maintaining good performance, allowing the application to handle more requests with lower latency and improved scalability.
