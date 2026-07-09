@@ -1,0 +1,12 @@
+Create a Python 3 program using OpenCV (cv2) that performs the following tasks:
+
+1. Read a food image from disk.
+2. Resize the image to 300 × 300 pixels.
+3. Convert it to grayscale.
+4. Apply Gaussian Blur with a kernel size of 5 × 5.
+5. Perform Canny Edge Detection.
+6. Count the total number of edge pixels using cv2.countNonZero().
+7. Display the original image and the edge-detected image side by side using cv2.hconcat().
+8. Save the edge image as ai_edge_output.jpg.
+9. Print the total edge pixel count and the saved filename.
+10. Use clear comments and readable Python code.

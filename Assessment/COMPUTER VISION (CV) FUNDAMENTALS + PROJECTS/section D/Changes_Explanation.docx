@@ -1,0 +1,5 @@
+### AI-Augmented Learning – Changes Made
+
+The original AI-generated program did not check whether the image file was successfully loaded before processing. If the image path was incorrect or the file was missing, the program crashed when attempting to resize the image.
+
+I fixed this by adding a file validation check using `if image is None:` before performing any image processing operations. This improvement makes the program more robust by displaying a clear error message and exiting gracefully instead of crashing.

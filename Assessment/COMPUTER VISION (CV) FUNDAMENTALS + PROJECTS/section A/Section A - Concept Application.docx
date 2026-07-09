@@ -1,0 +1,168 @@
+ ## Section A – Concept Application
+
+### Question 1
+S1
+SCENARIO
+You are building a food delivery platform where restaurant partners upload menu item
+photos. The product team wants to auto-categorise these images (e.g. biryani, pizza,
+desserts) using Computer Vision instead of manual tagging.
+
+Question: Explain what Computer Vision is and how it differs from a simple rules-based image
+filter. Why is a CV-based approach more suitable for categorising diverse food images than
+writing fixed conditions based on colour thresholds or brightness alone?
+
+
+**Answer:**
+
+Computer Vision (CV) is a field of Artificial Intelligence that enables computers to interpret, analyze, and understand images or videos in a way similar to human vision. It uses image processing and machine learning techniques to recognize objects, patterns, and visual features automatically.
+
+A simple rules-based image filter works by applying predefined conditions such as color thresholds, brightness levels, or pixel intensity. While this approach may work for very specific situations, it cannot handle variations in lighting, camera angles, food presentation, or image quality.
+
+A Computer Vision-based approach is more suitable for categorizing food images because it learns visual features such as shapes, textures, colors, and patterns from training data. It can correctly classify different food items even when they appear in different sizes, orientations, lighting conditions, or backgrounds. In contrast, fixed rules based only on color or brightness would fail when foods have similar colors or when lighting conditions change.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+### Question 2
+
+s1
+SCENARIO
+You are working on a food quality inspection system that analyses photos of delivered
+meals to check for freshness. The CV model was trained on small 128×128 grayscale
+images, but restaurant partners upload large RGB photos up to 4000×3000 pixels.
+
+Question: Describe the image preprocessing steps you would apply before passing each
+restaurant photo to the model. Why is resizing necessary, and in what situations would
+converting an RGB food image to grayscale be beneficial — and when would it lose information
+critical to a freshness check?
+
+**Answer:**
+
+Before passing restaurant images to the Computer Vision model, the following preprocessing steps should be applied:
+
+1. Load the image.
+2. Resize the image from 4000 × 3000 pixels to the model's required size of 128 × 128 pixels.
+3. Convert the image to grayscale if the model expects grayscale input.
+4. Normalize pixel values to improve model performance.
+5. Remove noise using filters if necessary.
+
+Resizing is necessary because the trained model accepts only images of a fixed size. It also reduces computational cost and ensures consistency between training and testing data.
+
+Converting an RGB image to grayscale is beneficial when color information is not important and only texture, edges, or shapes are needed. It also reduces memory usage and speeds up processing.
+
+However, grayscale conversion may lose important information during food freshness detection because color is often a key indicator of freshness. For example, changes in the color of vegetables, fruits, or meat can indicate spoilage, and this information would be lost after converting the image to grayscale.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+### Question 3
+
+S3
+SCENARIO
+You are developing a packaging label scanner for a cloud kitchen. Delivery bags are
+photographed by a ceiling-mounted camera, but bags sometimes arrive rotated at
+random angles, and the region of interest (the nutrition label) is always in the
+lower-right quadrant of the image.
+
+Question: Which OpenCV image transformation operations would you chain together to
+normalise these images before passing them to an OCR engine? Justify the order in which you
+would apply rotation, cropping, and flipping — and explain what goes wrong if you attempt to
+crop before correcting the orientation.
+
+**Answer:**
+
+The recommended sequence of OpenCV image transformations is:
+
+1. Rotation
+2. Flipping (if required)
+3. Cropping the Region of Interest (ROI)
+
+Rotation should be applied first to correct the orientation of the image. If the image is mirrored, flipping should then be performed to restore the correct layout. Finally, the nutrition label can be cropped from the lower-right region after the image has been correctly aligned.
+
+If cropping is performed before correcting the orientation, the selected region may not contain the nutrition label because the label's position changes when the image is rotated. As a result, the OCR engine may receive an incorrect or incomplete region, leading to poor text recognition.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+### Question 4
+
+S4
+SCENARIO
+You are designing a burnt-food detection system for a dark kitchen. The system
+captures images of dishes just before packing. A data scientist proposes using edge
+detection to highlight char marks and overcooked crust regions rather than training a
+full deep learning model.
+
+Question: Explain how the Canny edge detection algorithm works conceptually (gradient,
+non-maximum suppression, hysteresis). Why is applying a Gaussian blur before Canny
+important, and what trade-off exists between the low_threshold and high_threshold parameters
+when tuning the detector to detect dark char marks without also highlighting every bright plate
+rim?
+
+**Answer:**
+
+The Canny edge detection algorithm identifies object boundaries through four main stages:
+
+1. **Gaussian Blur:** Removes image noise and smooths the image.
+2. **Gradient Calculation:** Calculates the intensity change in both horizontal and vertical directions to identify potential edges.
+3. **Non-Maximum Suppression:** Removes weak edge responses and keeps only the strongest edge pixels.
+4. **Hysteresis Thresholding:** Uses low and high threshold values to determine which edges should be retained and which should be discarded.
+
+Applying a Gaussian blur before Canny is important because it reduces image noise that could otherwise create many false edges.
+
+The threshold values determine the sensitivity of edge detection. A lower threshold detects more edges but may introduce noise and unwanted plate boundaries. A higher threshold removes weak edges and reduces false detections but may also miss important char marks on burnt food. Therefore, the thresholds must be balanced to detect burnt regions while avoiding unnecessary edges.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+### Question 5
+
+S5
+SCENARIO
+You are debugging a face detection module that verifies a delivery agent's identity
+when they ring a customer's doorbell via a smart camera. The Haar cascade classifier is
+raising false positives — it detects faces on picture frames and decorative objects
+visible through the doorbell camera.
+
+Question: What causes false positives in Haar cascade face detection, and which parameters
+— scaleFactor, minNeighbors, minSize — can you tune to reduce them? Explain the effect of
+increasing minNeighbors and describe one specific scenario where setting it too high would
+cause the module to fail in a real deployment.
+
+
+**Answer:**
+
+False positives in Haar Cascade face detection occur when non-face objects contain visual patterns similar to facial features. Objects such as picture frames, decorative items, posters, or wall designs may accidentally match the Haar features used by the classifier.
+
+The following parameters can be adjusted to reduce false positives:
+
+* **scaleFactor:** Controls how much the image size is reduced at each scale. Smaller values improve accuracy but increase processing time.
+* **minNeighbors:** Specifies the minimum number of neighboring detections required before accepting a detected face.
+* **minSize:** Ignores objects smaller than a specified size.
+
+Increasing **minNeighbors** reduces false positives because only detections supported by multiple neighboring windows are accepted.
+
+However, if **minNeighbors** is set too high, genuine faces may be rejected. For example, if a delivery agent is standing far from the smart doorbell camera or is partially visible, the detector may fail to recognize the face because there are not enough neighboring detections.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+### Question 6
+
+S6
+SCENARIO
+You are optimising a real-time video surveillance system for a dark kitchen that
+monitors three food preparation stations simultaneously. The current implementation
+reads every frame and writes it to disk, causing a 4-second lag and high storage costs
+during peak hours.
+
+Question: Compare reading and processing every frame versus sampling frames at a fixed
+interval in OpenCV. What strategy would you use to skip redundant frames without missing
+important motion events, and how does the cap.set(cv2.CAP_PROP_POS_FRAMES, n) property
+help implement controlled frame skipping?
+
+
+**Answer:**
+
+Processing every video frame provides maximum accuracy because no visual information is missed. However, it requires significant processing power, increases storage usage, and can introduce delays in real-time applications.
+
+Sampling frames at fixed intervals processes only selected frames (for example, every fifth frame). This greatly reduces computational cost and storage while maintaining acceptable performance for many surveillance applications.
+
+A practical strategy is to process every few frames during normal monitoring and increase the processing rate only when motion is detected. This balances efficiency with accurate event detection.
+
+The OpenCV function `cap.set(cv2.CAP_PROP_POS_FRAMES, n)` allows the program to jump directly to a specified frame number. This makes controlled frame skipping possible, enabling the system to efficiently process only selected frames instead of reading every frame sequentially.
