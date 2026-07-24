@@ -1,0 +1,16 @@
+Create a Python 3 program that simulates a simple Reinforcement Learning (RL) food delivery episode.
+
+Requirements:
+1. Create an agent state containing location, reward, and step count.
+2. Define a sequence of delivery actions.
+3. Assign rewards to each action.
+4. Update the agent's state after every action.
+5. Print each step showing:
+   - Action
+   - Reward
+   - Running total reward
+   - Current location
+6. At the end, print:
+   - Total reward
+   - Total steps
+7. Use clear comments and readable Python code.

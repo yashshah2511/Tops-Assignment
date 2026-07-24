@@ -1,0 +1,5 @@
+### AI-Augmented Learning – Changes Made
+
+The AI-generated program assumed that every action in the episode was valid and present in the reward table. If an invalid action was included, the program would raise a `KeyError` and terminate.
+
+I fixed this by adding a validation check before accessing the reward table. If an invalid action is found, the program prints an error message and skips that action. This makes the program more robust and prevents unexpected crashes.

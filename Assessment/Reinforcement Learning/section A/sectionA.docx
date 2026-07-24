@@ -1,0 +1,174 @@
+S1 SCENARIO
+You are a data scientist at a food delivery company building an AI system that must
+automatically improve its delivery dispatching decisions over time, without being given
+any labelled examples of correct or incorrect dispatch choices.
+
+Question: Explain why Reinforcement Learning is more suitable than traditional programming
+for this dispatch system. What key characteristic of RL allows it to improve its decisions without
+relying on labelled training data?
+
+Answer:
+
+Reinforcement Learning (RL) is more suitable than traditional programming because the delivery dispatch system operates in a dynamic environment where traffic conditions, rider availability, weather, and customer demand constantly change. Writing fixed rules for every possible situation is difficult and inefficient.
+
+The key characteristic of RL is that it learns through trial and error by interacting with the environment and receiving rewards or penalties based on the outcomes of its actions. Unlike supervised learning, RL does not require labelled examples of the correct dispatch decisions. Instead, it continuously improves its policy by maximizing long-term rewards, such as faster deliveries, lower costs, and higher customer satisfaction.
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+S
+2
+SCENARIO
+You are building a restaurant recommendation engine and your manager suggests
+training a supervised learning model on historical order data. A colleague argues that a
+Reinforcement Learning agent would produce better results over time.
+
+Question: Compare how a supervised learning model and a Reinforcement Learning agent
+each learn to make recommendations. What fundamental difference in their learning
+mechanism would justify choosing RL for a continuously improving recommendation engine?
+
+
+Answer:
+
+A supervised learning model learns from historical labelled data, where each input has a known correct output. It predicts recommendations based on patterns found in past customer orders. Once trained, its performance depends on the quality and freshness of the training data.
+
+A Reinforcement Learning agent learns by interacting with users and receiving feedback in the form of rewards, such as customers clicking on or ordering recommended meals. It continuously updates its recommendation strategy based on new experiences.
+
+The fundamental difference is that supervised learning learns from labelled examples, whereas Reinforcement Learning learns from the consequences of its actions. RL is preferred for a continuously improving recommendation engine because it can adapt to changing customer preferences over time.
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+S
+3
+SCENARIO
+You are evaluating whether to use unsupervised learning (clustering) or Reinforcement
+Learning to optimise the delivery zones assigned to riders on your platform. Both
+approaches work without labelled data, yet your technical lead says they are
+fundamentally different.
+Question: What distinguishes a Reinforcement Learning system from an unsupervised learning
+system when the goal is to continuously improve delivery zone assignments based on real
+delivery outcomes?
+
+
+Answer:
+
+Although both Reinforcement Learning and unsupervised learning do not require labelled data, they have different objectives.
+
+Unsupervised learning discovers hidden patterns or groups within data, such as clustering delivery locations into different zones. It does not learn from feedback or improve its decisions through interaction.
+
+Reinforcement Learning, on the other hand, actively interacts with the environment, takes actions, receives rewards or penalties, and continuously improves its decision-making policy based on delivery outcomes.
+
+Therefore, RL is more suitable for optimizing delivery zone assignments because it can learn which assignments lead to faster deliveries, reduced costs, and better rider utilization over time.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+S
+4
+SCENARIO
+You are designing an RL agent for your food delivery platform that must decide which
+rider to assign to each incoming order. Your team needs to define the core components
+of the RL system before implementation begins.
+Question: Identify the agent, environment, set of possible actions, and reward signal for this
+delivery dispatch RL system. Justify why your chosen reward signal directly encourages efficient
+delivery performance rather than unintended shortcut behaviour.
+
+
+Answer:
+
+Agent:
+The AI dispatch system responsible for assigning riders to incoming orders.
+
+Environment:
+The food delivery platform, including customers, riders, restaurants, traffic conditions, and weather.
+
+Actions:
+
+Assign Rider A
+Assign Rider B
+Delay assignment
+Reassign an order
+Select the best available rider
+
+Reward Signal:
+The reward can be based on:
+
+Faster delivery times (+ reward)
+Successful on-time deliveries (+ reward)
+High customer satisfaction (+ reward)
+Reduced delivery cost (+ reward)
+Late deliveries (− penalty)
+Order cancellations (− penalty)
+
+This reward signal directly encourages efficient delivery performance because it rewards successful and timely deliveries while penalizing delays and poor service. It discourages shortcut behaviors that could negatively affect customer satisfaction or operational efficiency.
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+S
+5
+SCENARIO
+You are presenting Reinforcement Learning to your company's product team, who are
+familiar with how game-playing AI (such as chess engines) works. They want to
+understand how the same principle applies to food delivery.
+Question: Using game AI as a reference point, explain the core principle of how an RL agent
+learns through interaction with its environment. In what ways does the delivery dispatch scenario
+follow this same learning principle even though it is not a game?
+
+
+Answer:
+
+In game-playing AI such as chess, an RL agent learns by repeatedly playing games, making moves, observing the results, and receiving rewards for winning or penalties for losing. Over many interactions, it discovers strategies that maximize its chances of success.
+
+The food delivery dispatch system follows the same learning principle. Instead of making game moves, the agent selects delivery riders. After each assignment, it observes the delivery outcome, such as delivery time and customer feedback, and receives rewards or penalties. By continuously interacting with the environment, the agent gradually learns better dispatch strategies that improve overall delivery performance.
+
+Although food delivery is not a game, both systems use the same Reinforcement Learning process of interaction, feedback, and continuous improvement.
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+S
+6
+SCENARIO
+You are advising your company on adopting an RL-based system to personalise meal
+suggestions for each customer on your platform, similar to how streaming services use
+RL to personalise content recommendations.
+Question: Describe how Reinforcement Learning has been applied to recommendation systems
+in industry. What advantage does an RL-based recommendation system offer over a model
+trained once on historical data, particularly for customers whose food preferences change over
+time?
+
+
+Answer:
+
+Reinforcement Learning has been widely used in recommendation systems by companies such as streaming platforms and e-commerce services to personalize recommendations based on user interactions. Instead of relying only on historical data, an RL system continuously learns from user behavior, such as clicks, purchases, ratings, and browsing activity.
+
+For a food delivery platform, an RL-based recommendation system can adapt to changing customer preferences by updating its recommendation strategy whenever new interactions occur. For example, if a customer changes from ordering fast food to healthy meals, the RL agent gradually learns this preference and recommends healthier options.
+
+The main advantage over a model trained once on historical data is that Reinforcement Learning continuously improves through real-time feedback, providing more accurate and personalized recommendations as customer preferences evolve.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
